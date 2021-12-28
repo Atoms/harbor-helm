@@ -82,12 +82,31 @@ spec:
                 name: {{ .Values.database.external.existingSecret }}
                 key: {{ .Values.database.external.existingSecretKey }}
           {{- end }}
+          {{- if .Values.database.core.existingSecret }}
+          - name: CSRF_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.core.existingSecret }}
+                key: {{ .Values.core.existingxsrfKey }}
+          {{- end }}
           {{- if .Values.exsistingSecretAdminPassword }}
           - name: HARBOR_ADMIN_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.exsistingSecretAdminPassword }}
                 key: {{ .Values.exsistingSecretAdminPasswordKey }}
+          {{- end }}
+          {{- if .Values.registry.credentials.existingSecret }}
+          - name: REGISTRY_CREDENTIAL_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.registry.credentials.existingSecret }}
+                key: credentials_username
+          - name: REGISTRY_CREDENTIAL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.registry.credentials.existingSecret }}
+                key: credentials_password
           {{- end }}
           - name: CORE_SECRET
             valueFrom:

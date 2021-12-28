@@ -41,7 +41,9 @@ data:
   _REDIS_URL_REG: "{{ template "harbor.redis.urlForRegistry" . }}"
   PORTAL_URL: "{{ template "harbor.portalURL" . }}"
   REGISTRY_CONTROLLER_URL: "{{ template "harbor.registryControllerURL" . }}"
+  {{- if not .Values.registry.credentials.existingSecret }}
   REGISTRY_CREDENTIAL_USERNAME: "{{ .Values.registry.credentials.username }}"
+  {{- end }}
   {{- if .Values.uaaSecretName }}
   UAA_CA_ROOT: "/etc/core/auth-ca/auth-ca.crt"
   {{- end }}
