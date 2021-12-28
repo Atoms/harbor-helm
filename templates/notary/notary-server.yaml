@@ -64,7 +64,7 @@ spec:
           {{- if .Values.database.external.existingSecret }}
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.database.external.existingSecret }}
+              name: {{ .Values.core.existingSecret }}
               key: notary_server_dburl
           {{- else }}
           value: {{ template "harbor.database.notaryServer" . }}
