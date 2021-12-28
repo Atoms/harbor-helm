@@ -61,7 +61,7 @@ spec:
         - name: MIGRATIONS_PATH
           value: migrations/server/postgresql
         - name: DB_URL
-          {{-- if .Values.database.external.existingSecret }}
+          {{- if .Values.database.external.existingSecret }}
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.core.existingSecret }}
