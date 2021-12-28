@@ -70,6 +70,18 @@ spec:
 {{ toYaml .Values.jobservice.resources | indent 10 }}
 {{- end }}
         env:
+          {{- if .Values.registry.credentials.existingSecret }}
+          - name: REGISTRY_CREDENTIAL_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.registry.credentials.existingSecret }}
+                key: credentials_username
+          - name: REGISTRY_CREDENTIAL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.registry.credentials.existingSecret }}
+                key: credentials_password
+          {{- end }}
           - name: CORE_SECRET
             valueFrom:
               secretKeyRef:

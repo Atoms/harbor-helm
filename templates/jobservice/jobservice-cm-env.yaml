@@ -9,7 +9,9 @@ data:
   TOKEN_SERVICE_URL: "{{ template "harbor.tokenServiceURL" . }}"
   REGISTRY_URL: "{{ template "harbor.registryURL" . }}"
   REGISTRY_CONTROLLER_URL: "{{ template "harbor.registryControllerURL" . }}"
+  {{- if not .Values.registry.credentials.existingSecret }}
   REGISTRY_CREDENTIAL_USERNAME: "{{ .Values.registry.credentials.username }}"
+  {{- end }}
   {{- if has "jobservice" .Values.proxy.components }}
   HTTP_PROXY: "{{ .Values.proxy.httpProxy }}"
   HTTPS_PROXY: "{{ .Values.proxy.httpsProxy }}"
