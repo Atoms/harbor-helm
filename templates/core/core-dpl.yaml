@@ -82,7 +82,7 @@ spec:
                 name: {{ .Values.database.external.existingSecret }}
                 key: {{ .Values.database.external.existingSecretKey }}
           {{- end }}
-          {{- if .Values.database.core.existingSecret }}
+          {{- if .Values.core.existingSecret }}
           - name: CSRF_KEY
             valueFrom:
               secretKeyRef:
