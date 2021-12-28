@@ -60,11 +60,11 @@ spec:
         - name: MIGRATIONS_PATH
           value: migrations/signer/postgresql
         - name: DB_URL
-          {{-- if .Values.database.external.existingSecret }}
+          {{- if .Values.database.external.existingSecret }}
             valueFrom:
               secretKeyRef:
                 name: {{ .Values.core.existingSecret }}
-                key: notary_server_dburl
+                key: notary_signer_dburl
           {{- else }}
           value: {{ template "harbor.database.notarySigner" . }}
           {{- end }}
